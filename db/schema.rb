@@ -13,30 +13,31 @@
 ActiveRecord::Schema.define(version: 2022_02_05_173753) do
 
   create_table "posts", force: :cascade do |t|
-    t.text "post_title"
-    t.text "post_description"
-    t.text "post_url"
-    t.text "post_link"
-    t.text "post_content"
-    t.text "post_author"
+    t.string "title"
+    t.string "description"
+    t.string "slug"
+    t.string "link"
+    t.string "content"
+    t.string "author"
     t.integer "user_id"
     t.integer "sub_id"
   end
 
   create_table "subs", force: :cascade do |t|
-    t.text "sub_title"
-    t.text "sub_url"
-    t.text "sub_description"
-    t.text "sub_moderator"
-    t.integer "sub_member_count"
-    t.text "sub_create_date"
+    t.string "title"
+    t.string "url"
+    t.string "description"
+    t.string "moderator"
+    t.integer "member_count"
+    t.string "create_date"
   end
 
   create_table "users", force: :cascade do |t|
-    t.text "user_username"
-    t.text "user_url"
-    t.text "user_cakeday"
+    t.string "username"
+    t.string "url"
+    t.string "cakeday"
     t.integer "karma_score"
+    t.string "password_digest"
   end
 
 end

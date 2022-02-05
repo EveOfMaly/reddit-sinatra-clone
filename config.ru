@@ -5,4 +5,7 @@ if ActiveRecord::Base.connection.migration_context.needs_migration?
 end
 
 
+use PostController
+use SubController
+use UserController
 run ApplicationController

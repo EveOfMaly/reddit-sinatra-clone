@@ -1,4 +1,4 @@
-class SubsController < ApplicationController
+class SubController < ApplicationController
 
 
 end
