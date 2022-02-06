@@ -1,0 +1,10 @@
+<h1>Show User</h1>
+
+<form action="/users/<%= @user.slug %>" method="patch"> 
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <lable for="username"><%= @user.username %></lable>
+    <input type="text" id="user[username]" name="username">
+    <lable for="username"><%= @user.slug %></lable>
+    <input type="text" id="user[username]" name="username">
+    <input type="submit" value="Delete Account">
+</form>

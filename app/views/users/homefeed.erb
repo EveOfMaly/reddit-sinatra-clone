@@ -1,0 +1,8 @@
+<a href="">Log out </a>
+
+<h1>Reddit Homefeed</h1>
+
+<h3>See post from people and subs you follow</h3>
+<% Post.all.each do |post| %> 
+    <%=  post.title %><br>
+<% end %>
