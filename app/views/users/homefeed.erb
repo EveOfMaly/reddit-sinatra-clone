@@ -1,8 +1,12 @@
-<a href="">Log out </a>
+<a href="/users/#{@user.slug}/goodbye">Log out </a><br>
+<a href="/users/#{@user.slug}/edit">Edit </a><br>
+<a href="/users/#{@user.slug}">Profile</a><br>
+
 
 <h1>Reddit Homefeed</h1>
+<a href="/subreddits">Explore Subreddits</a>
 
-<h3>See post from people and subs you follow</h3>
+<h3>Explore Subreddits Below</h3>
 <% Post.all.each do |post| %> 
     <%=  post.title %><br>
 <% end %>

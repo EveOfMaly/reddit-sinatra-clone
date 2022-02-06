@@ -8,7 +8,11 @@ class ApplicationController < Sinatra::Base
 
     #homepage
     get "/" do 
-        erb :"index"
+        if logged_in?
+            erb :'users/homefeed' #not sure this is working
+        else
+            erb :"index"
+        end
     end
 
     helpers do

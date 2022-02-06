@@ -3,23 +3,27 @@ class UserController < ApplicationController
     #new user creation
 
     get '/new' do 
-        erb :'users/new_user'
+        if !logged_in?
+            erb :'users/new_user'
+        else 
+            erb :'users/homefeed'
+        end
     end
 
     post '/' do 
+    
+            if params[:username] == "" || params[:password] == "" 
+                redirect "/new"
+            end
 
-        if params[:username] == "" || params[:password] == "" 
-            redirect "/"
-        end
+            @user = User.new(username: params[:username], password: params[:password])
 
-        user = User.new(username: params[:username], password: params[:password])
-
-        if user.save 
-            session[:user_id] = user.id
-            erb :'users/homefeed'
-        else
-            redirect "/"
-        end
+            if @user.save 
+                session[:user_id] = @user.id
+                erb :'users/homefeed'
+            else
+                redirect "/"
+            end
     end
 
     #login
@@ -41,7 +45,7 @@ class UserController < ApplicationController
 
 
     #show
-    get "/user/:slug" do 
+    get "/users/:slug" do 
         @user = User.find_by_slug(params[:slug])
         erb :'users/show'
     end
@@ -49,7 +53,7 @@ class UserController < ApplicationController
     #edit user 
 
 
-    get '/user/edit' do 
+    get '/users/:slug/edit' do 
         erb :'users/edit'
     end
 
@@ -68,8 +72,13 @@ class UserController < ApplicationController
     
     #logout 
 
-    get '/users/:slug' do 
-        session.destroy 
+    get '/users/:slug/goodbye' do 
+        if logged_in?
+            session.destroy 
+            redirect "/login"
+        else
+            redirect "/"
+        end
     end
 
 end
