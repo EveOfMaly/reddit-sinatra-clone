@@ -41,7 +41,6 @@ class SubController < ApplicationController
     end
 
     patch '/subreddits/:id' do 
-        binding.pry
 #if user == moderator make changes
         if params[:sub][:title] == "" || params[:sub][:description] == "" 
             redirect "/subreddits"

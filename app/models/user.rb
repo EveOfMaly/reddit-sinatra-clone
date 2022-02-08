@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base 
     has_many :posts
-    has_many :subs, through: :post
+    has_many :subs
     has_secure_password
 
 

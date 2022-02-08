@@ -1,4 +1,5 @@
 class Sub < ActiveRecord::Base 
-    has_many :users, through: :post
+    has_many :postsubs
+    belongs_to :user
     has_many :posts, through: :postsubs
 end

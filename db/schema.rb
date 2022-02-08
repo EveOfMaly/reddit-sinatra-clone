@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_05_173753) do
+ActiveRecord::Schema.define(version: 2022_02_08_005253) do
 
   create_table "posts", force: :cascade do |t|
     t.string "title"
@@ -18,8 +18,11 @@ ActiveRecord::Schema.define(version: 2022_02_05_173753) do
     t.string "slug"
     t.string "link"
     t.string "content"
-    t.string "author"
     t.integer "user_id"
+  end
+
+  create_table "postsubs", force: :cascade do |t|
+    t.integer "post_id"
     t.integer "sub_id"
   end
 
@@ -27,8 +30,9 @@ ActiveRecord::Schema.define(version: 2022_02_05_173753) do
     t.string "title"
     t.string "url"
     t.string "description"
-    t.string "moderator_id"
+    t.integer "moderator_id"
     t.string "moderator_name"
+    t.integer "user_id"
     t.integer "member_count"
     t.string "create_date"
   end

@@ -13,7 +13,7 @@
 
     <lable>Subreddits</lable><br>
     <% Sub.all.each do |subreddit| %>
-        <input id="<%= subreddit.title %>"  type="checkbox"  name="subs_ids[]"  value="<%= subreddit.id %>"><%=subreddit.title %><br>
+        <input id="<%= subreddit.title %>"  type="checkbox"  name="sub_ids[]"  value="<%= subreddit.id %>"><%=subreddit.title %><br>
     <% end %>
     <input type="submit" value="submit">
 </form>

@@ -17,18 +17,27 @@ post "/posts" do
         redirect "/post/new"
     else
         #change :url to :link
+
         @post = Post.new(title: params[:post][:title], link: params[:post][:link], content: params[:post][:content])
-        #associate post with user
-        @user.posts << @post 
+        @user = current_user
+
+        params[:sub_ids].each do |sub|
+            @sub = Sub.find(sub.to_i)
+            @post.subs << @sub
+        end
+        @post.user = @user
+    
         #associate post with subreddit 
-       binding.pry
-        #save
+        @post.slug = "/posts/#{@post.id}"
+        @post.save 
+
+        redirect "/subreddits"
     end
 end
 
 
 get "/posts/:id" do 
-
+    #add delete post 
 end
 
 get "/posts/:id/edit" do 

@@ -9,5 +9,4 @@ use Rack::MethodOverride
 use PostController
 use SubController
 use UserController
-use PostSubsController
 run ApplicationController

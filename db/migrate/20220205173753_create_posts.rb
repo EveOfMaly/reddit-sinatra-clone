@@ -6,9 +6,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.string :slug
       t.string :link 
       t.string  :content
-      t.string :author
       t.integer :user_id
-      t.integer :sub_id
     end
   end
 end
