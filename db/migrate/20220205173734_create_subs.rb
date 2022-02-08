@@ -4,7 +4,8 @@ class CreateSubs < ActiveRecord::Migration[6.1]
       t.string :title
       t.string :url 
       t.string :description
-      t.string :moderator
+      t.string :moderator_id
+      t.string :moderator_name
         t.integer :member_count
         t.string :create_date
     end

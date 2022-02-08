@@ -1,3 +1,18 @@
-<h1> Edit Profile Page</h2>
-<p><b>Username:</b> <%= @user.username %> </p>
- <p><b> Email:</b> <%= @user.email %></p>
+<h1> Edit <%= @user.username %> Profile Page</h2>
+<form action="/users/<%= @user.slug %>" method="POST"> 
+    <input id="hidden" type="hidden" name="_method" value="patch">
+
+    <lable for="username">Username: </lable><br>
+    <input type="text" id="user[username]" name="username"><br>
+    
+    <p>URL: "/users/"+"<%= @user.slug %>" </p><br>
+
+    <lable for="cakeday">Cakeday:</lable><br>
+    <input type="text" id="user[cakeday]" name="cakeday" placeholder="<%= current_user.cakeday %>"> <br>
+   
+    <input type="submit" value="submit"><br>
+</form>
+<a href="/">Home</a><br>
+<a href="/subreddits">Explore Subreddits</a><br>
+
+

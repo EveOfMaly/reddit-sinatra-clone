@@ -1,0 +1,12 @@
+<h1>edit sub  </h1>
+
+<form action='/subreddits/<%= @sub.id %>' method="post">
+<input id="hidden" type="hidden" name="_method" value="patch">
+    <lable for="sub_title">Title: <%= @sub.title %><br>
+    <input type="text" name="sub[title]" id="sub_title" placeholder="<%=@sub.title %>"><br>
+    <br>
+    <lable for="sub_description">Description: <%= @sub.description %><br>
+    <input type="text" name="sub[description]" id="sub_description" placeholder="<%=@sub.description %>">
+    <br>
+    <input type="submit" value="submit">
+</form>

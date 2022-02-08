@@ -27,7 +27,8 @@ ActiveRecord::Schema.define(version: 2022_02_05_173753) do
     t.string "title"
     t.string "url"
     t.string "description"
-    t.string "moderator"
+    t.string "moderator_id"
+    t.string "moderator_name"
     t.integer "member_count"
     t.string "create_date"
   end

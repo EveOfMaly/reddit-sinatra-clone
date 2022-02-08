@@ -1,0 +1,19 @@
+<h1>New Post</h1>
+
+<form action="/posts" method="post">
+    <lable for="post_title">Title: </lable>
+    <input type="type" name="post[title]" id="post_title">   
+    
+    <lable for="post_link">URL: </lable>
+    <input type="type" name="post[link]" id="post_link">    
+
+    <lable for="post_content">Content: </lable>
+    <input type="type" name="post[content]" id="post_content">    
+    <br>
+
+    <lable>Subreddits</lable><br>
+    <% Sub.all.each do |subreddit| %>
+        <input id="<%= subreddit.title %>"  type="checkbox"  name="subs_ids[]"  value="<%= subreddit.id %>"><%=subreddit.title %><br>
+    <% end %>
+    <input type="submit" value="submit">
+</form>

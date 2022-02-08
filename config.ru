@@ -5,7 +5,9 @@ if ActiveRecord::Base.connection.migration_context.needs_migration?
 end
 
 
+use Rack::MethodOverride
 use PostController
 use SubController
 use UserController
+use PostSubsController
 run ApplicationController

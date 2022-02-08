@@ -1,4 +1,5 @@
 
+
 <a href="/subreddits/new">Create a Sureddit</a><br>
 <a href="/subreddits">Explore Subreddits</a><br>
 <a href="/users/<%= current_user.slug %>/goodbye">Log out </a><br>
@@ -6,9 +7,14 @@
 <a href="/users/<%= current_user.slug %>">Profile</a><br>
 
 
-<h1>Reddit Homefeed</h1>
 
-<h3>Explore Post Below</h3>
-<% Post.all.each do |post| %> 
-    <%=  post.title %><br>
+
+<h1>All the subreddits </h1>
+<p>
+<ul>
+<% Sub.all.each do |sub| %>
+    
+    <li><a href="/subreddits/<%=sub.id %>"><%= sub.title %></a><br>
 <% end %>
+</ul>
+</p>

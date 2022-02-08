@@ -1,0 +1,3 @@
+class PostSubsController < ApplicationController
+
+end

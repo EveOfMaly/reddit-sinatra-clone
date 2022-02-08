@@ -1,8 +1,19 @@
 class UserController < ApplicationController
 
-    #new user creation
+     #new user creation
 
-    get '/new' do 
+        #show
+    get "/users/:slug" do 
+      
+        @user = User.find_by_slug(params[:slug])
+ 
+        erb :'users/show'
+        
+    end
+
+
+    #new
+     get '/new' do 
         if !logged_in?
             erb :'users/new_user'
         else 
@@ -10,7 +21,8 @@ class UserController < ApplicationController
         end
     end
 
-    post '/' do 
+    #create
+    post '/users' do 
     
             if params[:username] == "" || params[:password] == "" 
                 redirect "/new"
@@ -26,40 +38,68 @@ class UserController < ApplicationController
             end
     end
 
+
+
+
     #login
     get '/login' do 
         erb :"users/login"
     end
 
     post '/login' do 
+        #BobMassa
+        #cash
         user = User.find_by(username: params[:username])
        
         if user && user.authenticate(params[:password])
-            user.create_slug
-            user.save
-            redirect  "" 
+            session[:user_id] = user.id
+            redirect  "/" 
         else 
-            redirect "failure"
+            #failure message
+            redirect "/login"
         end
     end
 
 
-    #show
-    get "/users/:slug" do 
-        @user = User.find_by_slug(params[:slug])
-        erb :'users/show'
-    end
+ 
 
+    #
+
+    
     #edit user 
 
-
     get '/users/:slug/edit' do 
-        erb :'users/edit'
+        @user = User.find_by_slug(params[:slug])
+        if logged_in?
+            erb :'users/edit'
+        else
+            redirect "/"
+        end
     end
 
-    get '/users/:slug' do 
-        session.destroy 
+    patch '/users/:slug' do  
+        @user = User.find_by_slug(params[:slug])
+      
+        if logged_in?
+            if params[:username] == "" 
+                redirect "/users/:slug/edit"
+            else 
+                @user.update(username: params[:username], cakeday: params[:cakeday])
+                @user.save
+                
+                redirect "/users/#{@user.slug}"
+            end
+        else
+            redirect "/"
+        end
+ 
+        
     end
+
+
+    # get '/users/:slug' do 
+    #     session.destroy 
+    # end
 
 
 
