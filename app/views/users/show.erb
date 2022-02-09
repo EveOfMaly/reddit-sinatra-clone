@@ -1,10 +1,23 @@
-<h1>Show User</h1>
+
+
+
+<% if flash.has?(:message) %> <%= flash[:message] %> <% end %>
+<br>
+<br>
+<a href="/subreddits/new">Create a Subreddit</a><br>
+<a href="/subreddits">Explore Subreddits</a><br>
+<a href="/users/<%= current_user.slug %>/goodbye">Log out </a><br>
+<a href="/users/<%= current_user.slug %>">Profile</a><br>
+
+
+<h1><%= @user.username%> Profile</h1>
 
 <form action="/users/<%= @user.slug %>" method="patch"> 
     <input id="hidden" type="hidden" name="_method" value="delete">
-    <lable for="username"><%= @user.username %></lable>
+    <lable for="username">Username: <%= @user.username %></lable>
     <input type="text" id="user[username]" name="username">
-    <lable for="username"><%= @user.slug %></lable>
+    <lable for="username">URL: <%= @user.slug %></lable>
     <input type="text" id="user[username]" name="username">
-    <input type="submit" value="Delete Account">
+    <input type="submit" value="Delete Account"><br>
+    <a href="/users/<%= current_user.slug %>/edit">Edit </a><br>
 </form>

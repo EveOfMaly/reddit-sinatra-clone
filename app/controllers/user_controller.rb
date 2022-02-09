@@ -1,5 +1,7 @@
+require "rack-flash"
 class UserController < ApplicationController
-
+    use Rack::Flash
+    
      #new user creation
 
         #show
@@ -25,12 +27,14 @@ class UserController < ApplicationController
     post '/users' do 
     
             if params[:username] == "" || params[:password] == "" 
+                flash[:message] = "Unable to create a user. Please add a username and password."
                 redirect "/new"
             end
 
             @user = User.new(username: params[:username], password: params[:password])
 
             if @user.save 
+                flash[:message] = "Account Successfully created."
                 session[:user_id] = @user.id
                 erb :'users/homefeed'
             else
@@ -43,7 +47,11 @@ class UserController < ApplicationController
 
     #login
     get '/login' do 
-        erb :"users/login"
+        if logged_in?
+            redirect "/"
+        else
+            erb :"users/login"
+        end
     end
 
     post '/login' do 
@@ -52,10 +60,11 @@ class UserController < ApplicationController
         user = User.find_by(username: params[:username])
        
         if user && user.authenticate(params[:password])
+            flash[:message] = "Successfully logged in."
             session[:user_id] = user.id
             redirect  "/" 
         else 
-            #failure message
+            flash[:message] = "Login failed. Please try again."
             redirect "/login"
         end
     end
@@ -70,7 +79,8 @@ class UserController < ApplicationController
 
     get '/users/:slug/edit' do 
         @user = User.find_by_slug(params[:slug])
-        if logged_in?
+    
+        if logged_in? && @user.id == current_user.id
             erb :'users/edit'
         else
             redirect "/"
@@ -80,16 +90,18 @@ class UserController < ApplicationController
     patch '/users/:slug' do  
         @user = User.find_by_slug(params[:slug])
       
-        if logged_in?
+
+        if logged_in? && @user.id == current_user.id
             if params[:username] == "" 
                 redirect "/users/:slug/edit"
             else 
                 @user.update(username: params[:username], cakeday: params[:cakeday])
                 @user.save
-                
+                flash[:message] = "Profile sucesfully edited." #message worked.ß
                 redirect "/users/#{@user.slug}"
             end
         else
+            flash[:message] = "Profile was not edited." #message worked.ß
             redirect "/"
         end
  

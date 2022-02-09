@@ -1,3 +1,4 @@
+
 class PostController < ApplicationController
 
 get "/posts" do 
@@ -57,7 +58,7 @@ patch '/posts/:id' do
         binding.pry
         #if post.subs.owner == current_user    
             #make changes
-            
+
         # # if @post.user == current_user 
         #     @post = Post.find_by(id: params[:id])
         #     @post.update(title: params[:post][:title], link: params[:post][:link], content: params[:post][:content])

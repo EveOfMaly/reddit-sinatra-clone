@@ -1,22 +1,28 @@
-#make this a delete also
+<% if flash.has?(:message) %> <%= flash[:message] %> <% end %>
+<br>
+<br>
 
-<a href="/subreddits/new">Create a Sureddit</a><br>
+
+<a href="/subreddits/new">Create a Subreddit</a><br>
 <a href="/subreddits">Explore Subreddits</a><br>
 <a href="/users/<%= current_user.slug %>/goodbye">Log out </a><br>
-<a href="/users/<%= current_user.slug %>/edit">Edit </a><br>
 <a href="/users/<%= current_user.slug %>">Profile</a><br>
+<br>
+<br>
 
-<h1> <%= @sub.title %>
-<h3> Description: </h3>
-<h4> <%= @sub.description %> </h4>
+<h1><%= @sub.title %> Information </h1>
+    <form action="/subreddits/<%= @sub.id %>" method="patch"> 
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <lable><b>Description:</b> <br> <br><%= @sub.description %>  </lable><br>
+    <lable><b>Moderator:</b> <br><br> <%= @sub.user.username %></lable> <br>
+    <input type="submit" value="delete"> <br>
+    </form>
 
-<a href="/posts/new">Make New Post!<a/>
-
+Make New Post!
 <% Post.all.each do |post| %>
     <ul>
      <li><a href="/posts/<%= post.id %>"><%= post.title %><br></a></li>
      </ul>
      <% end  %>
-
 
 <a href="/subreddits/<%=@sub.id %>/edit">Edit</a>
