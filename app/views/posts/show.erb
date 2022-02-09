@@ -7,34 +7,18 @@
 <a href="/users/<%= current_user.slug %>">Profile</a><br>
 
 
-<h1>Show User</h1>
+<h1><%= @post.title%> </h1>
 
-<form action="/posts/<%= @post.id %>" method="patch"> 
+<form action="/posts/<%= @post.id %>" method="post"> 
     <input id="hidden" type="hidden" name="_method" value="delete">
-    <lable for="title"><%= @post.title %></lable>
-    <input type="text" id="post[title]" name="title">
-    <lable for="content"><%= @post.content %></lable>
-    <input type="text" id="post[content]" name="content">
+   
+    <lable for="title">Current Title: <%= @post.title %></lable><br>
+   
+    <lable for="content">Current Content: <%= @post.content %></lable><br>
+    
 
-    <lable for="moderator"><%= @post.user_id %></lable>
-    <input type="text" id="post[moderator]" name="moderator">
-    <input type="submit" value="Delete Account">
+    <input type="submit" value="Delete Post">
 </form>
 
 
-
-
-<h1> <%= @post.title %>
-<h3> Description: </h3>
-<h4> <%= @sub.description %> </h4>
-
-<a href="/posts/new">Make New Post!<a/>
-
-<% Post.all.each do |post| %>
-    <ul>
-     <li><a href="/posts/<%= post.id %>"><%= post.title %><br></a></li>
-     </ul>
-     <% end  %>
-
-
-<a href="/subreddits/<%=@sub.id %>/edit">Edit</a>
+<a href="/posts/<%=@post.id %>/edit">Edit Post</a>
