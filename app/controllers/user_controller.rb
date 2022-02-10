@@ -93,6 +93,7 @@ class UserController < ApplicationController
       
         if logged_in? && @user.id == current_user.id
             if params[:username] == "" 
+                flash[:message] = "Unable to create user. Please add a username."
                 redirect "/users/:slug/edit"
             end
 
