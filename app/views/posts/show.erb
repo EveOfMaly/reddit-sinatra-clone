@@ -1,4 +1,6 @@
-#make this a delete also
+<% if flash.has?(:message) %> <%= flash[:message] %> <% end %>
+<br>
+<br>
 
 <a href="/subreddits/new">Create a Subreddit</a><br>
 <a href="/subreddits">Explore Subreddits</a><br>

@@ -11,18 +11,24 @@
 <br>
 
 <h1><%= @sub.title %> Information </h1>
-    <form action="/subreddits/<%= @sub.id %>" method="patch"> 
+    <form action="/subreddits/<%= @sub.id %>" method="post"> 
     <input id="hidden" type="hidden" name="_method" value="delete">
-    <lable><b>Description:</b> <br> <br><%= @sub.description %>  </lable><br>
-    <lable><b>Moderator:</b> <br><br> <%= @sub.user.username %></lable> <br>
-    <input type="submit" value="delete"> <br>
-    </form>
-
-Make New Post!
+    <lable><b>Description</b>  <br><%= @sub.description %>  </lable><br>
+    <br><lable><b>Moderator:</b><br> <%= @sub.user.username %></lable> <br>
+<br>
+<br>
+<a href="/posts/new">Make New Post!<a/><br>
 <% Post.all.each do |post| %>
     <ul>
      <li><a href="/posts/<%= post.id %>"><%= post.title %><br></a></li>
      </ul>
      <% end  %>
+    <br>
+
+    <input type="submit" value="delete subreddit"> <br>
+    </form>
+    <br>
+    <br>
+
 
 <a href="/subreddits/<%=@sub.id %>/edit">Edit</a>

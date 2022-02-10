@@ -1,4 +1,8 @@
 
+<% if flash.has?(:message) %> <%= flash[:message] %> <% end %>
+<br>
+<br>
+
 <a href="/subreddits/new">Create a Subreddit</a><br>
 <a href="/subreddits">Explore Subreddits</a><br>
 <a href="/users/<%= current_user.slug %>/goodbye">Log out </a><br>

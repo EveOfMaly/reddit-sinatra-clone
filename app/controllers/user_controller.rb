@@ -2,15 +2,15 @@ require "rack-flash"
 class UserController < ApplicationController
     use Rack::Flash
     
-     #new user creation
 
-        #show
+   #show
     get "/users/:slug" do 
-      
-        @user = User.find_by_slug(params[:slug])
- 
-        erb :'users/show'
-        
+        if logged_in?
+            @user = User.find_by_slug(params[:slug])
+            erb :'users/show'
+        else
+            redirect "/"
+        end
     end
 
 
@@ -34,7 +34,7 @@ class UserController < ApplicationController
             @user = User.new(username: params[:username], password: params[:password])
 
             if @user.save 
-                flash[:message] = "Account Successfully created."
+                flash[:message] = "Account Successfully created." #message displayed
                 session[:user_id] = @user.id
                 erb :'users/homefeed'
             else
@@ -62,6 +62,7 @@ class UserController < ApplicationController
         if user && user.authenticate(params[:password])
             flash[:message] = "Successfully logged in."
             session[:user_id] = user.id
+            binding.pry
             redirect  "/" 
         else 
             flash[:message] = "Login failed. Please try again."
@@ -70,11 +71,6 @@ class UserController < ApplicationController
     end
 
 
- 
-
-    #
-
-    
     #edit user 
 
     get '/users/:slug/edit' do 
@@ -89,8 +85,7 @@ class UserController < ApplicationController
 
     patch '/users/:slug' do  
         @user = User.find_by_slug(params[:slug])
-      
-
+    
         if logged_in? && @user.id == current_user.id
             if params[:username] == "" 
                 redirect "/users/:slug/edit"
@@ -108,29 +103,27 @@ class UserController < ApplicationController
         
     end
 
-
-    # get '/users/:slug' do 
-    #     session.destroy 
-    # end
-
-
+    get '/users/:slug/goodbye' do 
+        if logged_in?
+            session.destroy 
+            redirect "/"
+        else
+            redirect "/"
+        end
+    end
 
     #delete account 
 
     delete '/users/:slug' do 
         @user = User.find_by_slug(params[:slug])
-        @user.destory 
-    end
-    
-    #logout 
-
-    get '/users/:slug/goodbye' do 
-        if logged_in?
+        if @user.id == current_user.id
             session.destroy 
-            redirect "/login"
+            @user.destroy 
+            redirect "/"
         else
             redirect "/"
         end
     end
+    
 
 end

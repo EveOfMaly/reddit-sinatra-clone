@@ -1,11 +1,6 @@
 
 class PostController < ApplicationController
 
-get "/posts" do 
-
-end
-
-#new
 
 #new post
 get '/posts/new' do 
@@ -15,10 +10,10 @@ end
 #create post 
 post "/posts" do 
     if params[:post][:title] == "" || params[:post][:content] == ""
+        flash[:message] = "Missing information. Changes were not made. Please fill in all required information in the post."
         redirect "/post/new"
     else
         #change :url to :link
-
         @post = Post.new(title: params[:post][:title], link: params[:post][:link], content: params[:post][:content])
         @user = current_user
 
@@ -31,7 +26,7 @@ post "/posts" do
         #associate post with subreddit 
         @post.slug = "/posts/#{@post.id}"
         @post.save 
-
+        flash[:message] = "Post was sucesfully made."
         redirect "/posts/#{@post.id}"
     end
 end
@@ -50,28 +45,27 @@ end
 
 #update
 patch '/posts/:id' do 
-
+    @post = Post.find_by(id: params[:id])
     #moderator is allowed to update the title and description
-    if params[:post][:title] == "" || params[:post][:content] == "" || params[:post][:link] == "" 
-        redirect "/post/new"
-    else
-        binding.pry
-        #if post.subs.owner == current_user    
-            #make changes
 
-        # # if @post.user == current_user 
-        #     @post = Post.find_by(id: params[:id])
-        #     @post.update(title: params[:post][:title], link: params[:post][:link], content: params[:post][:content])
-        #     params[:sub_ids].each do |sub|
-        #         @sub = Sub.find(sub.to_i)
-        #         @post.subs << @sub
-        #     end
-        #     @post.slug = "/posts/#{@post.id}" 
-        #     @post.save 
-        #     redirect "/posts/#{@post.id}"
-        # # else
-        # #     "failure"
-        # # end
+    if logged_in? && @post.user == current_user
+        if params[:post][:title] == "" || params[:post][:content] == "" || params[:post][:link] == "" 
+            flash[:message] = "Missing information. Changes were not made. Please fill in all required information in the post." #message showed up
+            redirect "/post/new"
+        else
+            @post.update(title: params[:post][:title], link: params[:post][:link], content: params[:post][:content])
+            
+            params[:sub_ids].each do |sub|
+                    @sub = Sub.find(sub.to_i)
+                    @post.subs << @sub
+             end
+            @post.slug = "/posts/#{@post.id}" 
+            @post.save 
+            flash[:message] = "Post was sucesfully made."
+            redirect "/posts/#{@post.id}"
+        end
+    else
+        redirect "/subreddits"
     end
 end
 
@@ -79,8 +73,12 @@ end
 
     delete "/posts/:id" do 
         @post = Post.find_by(id: params[:id])
-        @post.destroy
-        redirect "/subreddits"
+        if logged_in? && @post.user == current_user
+            @post.destroy
+            redirect "/subreddits"
+        else
+            redirect "/subreddits"
+        end
     end
 
 
