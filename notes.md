@@ -12,7 +12,7 @@ Reddit Clone Notes
         Moderator  - Creator of the sub
         # of members
         #created_date
-        *Anon profile views*
+
 
     Post
         Title
@@ -32,6 +32,7 @@ Reddit Clone Notes
     Sub
     A Sub belongs to a Post 
     A Sub has many Posts through PosTSubs 
+      Has many Post Subs
 
     Post 
     A Post belongs to a User 
