@@ -19,10 +19,12 @@
 <br>
 <a href="/posts/new">Make New Post!<a/><br>
 <% Post.all.each do |post| %>
-    <ul>
-     <li><a href="/posts/<%= post.id %>"><%= post.title %><br></a></li>
-     </ul>
-     <% end  %>
+    <% if @sub.posts.include?(post) %>
+        <ul>
+        <li><a href="/posts/<%= post.id %>"><%= post.title %><br></a></li>
+        </ul>
+    <% end  %>
+ <% end  %>
     <br>
 
     <input type="submit" value="delete subreddit"> <br>

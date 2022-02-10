@@ -11,5 +11,5 @@
 
 <h3>Explore Post Below</h3>
 <% Post.all.each do |post| %> 
-    <%=  post.title %><br>
+    <a href="posts/<%= post.id%>"><%= post.title %><a/><br>
 <% end %>

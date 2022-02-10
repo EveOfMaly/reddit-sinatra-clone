@@ -11,7 +11,7 @@ end
 post "/posts" do 
     if params[:post][:title] == "" || params[:post][:content] == ""
         flash[:message] = "Missing information. Changes were not made. Please fill in all required information in the post."
-        redirect "/post/new"
+        redirect "/posts/new"
     else
         #change :url to :link
         @post = Post.new(title: params[:post][:title], link: params[:post][:link], content: params[:post][:content])
@@ -40,7 +40,11 @@ end
 #edit posts
 get "/posts/:id/edit" do 
     @post = Post.find_by(id: params[:id])
-    erb :'posts/edit'
+    if logged_in? && current_user == @post.user
+        erb :'posts/edit'
+    else
+        redirect "/posts/#{@post.id}"
+    end
 end
 
 #update
@@ -51,7 +55,7 @@ patch '/posts/:id' do
     if logged_in? && @post.user == current_user
         if params[:post][:title] == "" || params[:post][:content] == "" || params[:post][:link] == "" 
             flash[:message] = "Missing information. Changes were not made. Please fill in all required information in the post." #message showed up
-            redirect "/post/new"
+            redirect "/posts/#{@post.id}"
         else
             @post.update(title: params[:post][:title], link: params[:post][:link], content: params[:post][:content])
             
