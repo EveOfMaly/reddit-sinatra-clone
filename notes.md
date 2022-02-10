@@ -27,14 +27,15 @@ Reddit Clone Notes
 2. Associations  
     User 
      A user has many POST 
-     A user many SUBS through POST
+     A user many SUBS 
 
     Sub
-    A Sub has many Post 
-    A Sub has many Users through Post 
+    A Sub belongs to a Post 
+    A Sub has many Posts through PosTSubs 
 
     Post 
     A Post belongs to a User 
-    A Post belongs to a Community
+    A Post Has many Subs
+    Has many Post Subs
 
 
