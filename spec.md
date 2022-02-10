@@ -38,7 +38,7 @@ Specs:
     - Post, User, Subs cannot have empty items. Redirects the user.
 - [x] BONUS - not required - Display validation failures to user with error message (example form URL e.g. /posts/new)
      - Used Rack::Flash to show processes to the user.
-- [ ] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
+- [x] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
 
 Confirm
 - [x] You have a large number of small Git commits
