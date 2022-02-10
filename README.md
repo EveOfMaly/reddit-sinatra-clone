@@ -6,6 +6,7 @@ Usage
 To use this app, just clone, run rake db:migrate and then run shotgun. Everything should be setup.
 
 License Details
+https://github.com/EveOfMaly/reddit-sinatra-clone/blob/main/LICENSE
 
 Current Features
 - Auth for users 
