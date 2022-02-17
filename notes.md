@@ -31,12 +31,12 @@ Reddit Clone Notes
 
     Sub
     A Sub belongs to a User 
-    A Sub has many Posts through PosTSubs 
-      Has many Post Subs
+    A Sub has many Posts through Postsubs 
+    A Sub has has many Postsubs
 
     Post 
     A Post belongs to a User 
-    A Post Has many Subs
-    Has many Post Subs
+    A Post has many Postsubs
+    Has many Subs through Postsubs 
 
 
