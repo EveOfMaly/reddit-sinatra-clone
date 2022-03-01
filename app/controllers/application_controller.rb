@@ -17,6 +17,15 @@ class ApplicationController < Sinatra::Base
         end
     end
 
+    #live coding note 
+    # get '/about' do 
+    #     if logged_in? && current_user
+    #        "Thank for being a member, #{current_user.username}."
+    #     else 
+    #         "please login or signup"
+    #     end
+    # end
+
     helpers do
 		def logged_in?
 			!!session[:user_id]
