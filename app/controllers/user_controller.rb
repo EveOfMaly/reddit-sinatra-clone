@@ -24,15 +24,6 @@ class UserController < ApplicationController
     end
 
 
-    get '/about' do 
-        @user = User.find_by_slug(params[:slug])
-        
-        if !logged_in?
-           "Thank for being a member, username"
-        else 
-            "please login or signup"
-        end
-    end
 
     #create an individual user profile
     post '/users' do 

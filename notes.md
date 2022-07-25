@@ -12,8 +12,6 @@ Reddit Clone Notes
         Moderator  - Creator of the sub
         # of members
         #created_date
-
-
     Post
         Title
         Description

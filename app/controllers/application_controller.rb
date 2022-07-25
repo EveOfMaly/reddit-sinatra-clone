@@ -11,20 +11,18 @@ class ApplicationController < Sinatra::Base
     #homepage
     get "/" do 
         if logged_in?
-            erb :'users/homefeed' #not sure this is working
+            erb :'users/homefeed' 
         else
             erb :"index"
         end
     end
 
-    #live coding note 
-    # get '/about' do 
-    #     if logged_in? && current_user
-    #        "Thank for being a member, #{current_user.username}."
-    #     else 
-    #         "please login or signup"
-    #     end
-    # end
+    get "/about" do 
+         erb :'about'
+    end
+
+
+
 
     helpers do
 		def logged_in?
