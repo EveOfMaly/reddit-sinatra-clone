@@ -1,13 +1,41 @@
-ENV['SINATRA_ENV'] ||= "development"
+# ENV['SINATRA_ENV'] ||= "development"
 
-require "dotenv/load"
+# require "dotenv/load"
+# require 'bundler/setup'
+# require 'rack-flash'
+# require 'sinatra'
+# require 'sinatra/flash'
+# Bundler.require(:default, ENV['SINATRA_ENV'])
+
+# set :database_file, "./database.yml"
+# # ActiveRecord::Base.establish_connection(ENV['SINATRA_ENV'].to_sym)
+
+# require_all 'app'
+
+
 require 'bundler/setup'
-require 'rack-flash'
-require 'sinatra'
-require 'sinatra/flash'
-Bundler.require(:default, ENV['SINATRA_ENV'])
+Bundler.require
 
-set :database_file, "./database.yml"
-# ActiveRecord::Base.establish_connection(ENV['SINATRA_ENV'].to_sym)
+configure :development do
+  ENV['SINATRA_ENV'] ||= "development"
+
+  ActiveRecord::Base.establish_connection(
+    :adapter => "sqlite3",
+    :database => "db/micro_reddit_clone#{ENV['SINATRA_ENV']}.sqlite"
+  )
+end
+
+configure :production do
+  db = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/mydb')
+
+  ActiveRecord::Base.establish_connection(
+    :adapter => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
+    :host     => db.host,
+    :username => db.user,
+    :password => db.password,
+    :database => db.path[1..-1],
+    :encoding => 'utf8'
+  )
+end
 
 require_all 'app'

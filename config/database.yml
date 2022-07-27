@@ -1,13 +1,18 @@
+
 development:
   adapter: sqlite3
-  encoding: unicode
-  database: db/development.db
+  database: db/reddit_sinatra_clone_development.db
   host: localhost
-  pool: 5
 
-production:
+
+production: &default
   adapter: postgresql
   encoding: unicode
-  database: production
+  database: production_reddit_sinatra_clone
   host: <%= ENV['DATABASE_HOST'] %>
+  username: postgres
   pool: 5
+
+
+
+

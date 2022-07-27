@@ -10,36 +10,5 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_08_005253) do
-  create_table "posts", force: :cascade do |t|
-    t.string "title"
-    t.string "description"
-    t.string "slug"
-    t.string "link"
-    t.string "content"
-    t.integer "user_id"
-  end
-
-  create_table "postsubs", force: :cascade do |t|
-    t.integer "post_id"
-    t.integer "sub_id"
-  end
-
-  create_table "subs", force: :cascade do |t|
-    t.string "title"
-    t.string "url"
-    t.string "description"
-    t.integer "user_id"
-    t.integer "member_count"
-    t.string "create_date"
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "url"
-    t.string "cakeday"
-    t.integer "karma_score"
-    t.string "password_digest"
-  end
-
+ActiveRecord::Schema[7.0].define(version: 0) do
 end
