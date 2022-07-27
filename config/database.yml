@@ -10,7 +10,6 @@ production: &default
   encoding: unicode
   database: production_reddit_sinatra_clone
   host: <%= ENV['DATABASE_HOST'] %>
-  username: postgres
   pool: 5
 
 
